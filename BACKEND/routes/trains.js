@@ -5,8 +5,8 @@ const router = express.Router();
 
 
 router.route("/display").get((req,res)=>{
-    Train.find().then((resG)=>{
-        res.status(200).send(resG)
+    Train.find().then((resp)=>{
+        res.json(resp)
     }).catch((err)=>{
         res.status(500).send({message:"get doesn't work",err})
     })
@@ -16,7 +16,8 @@ router.route("/display").get((req,res)=>{
 
   router.route("/update/:id").put(async(req,res)=>{
     let userId =req.params.id;
-    const{trainCode,
+    const{
+        trainCode,
         trainName,
         departureTime,
         departureLocation,
