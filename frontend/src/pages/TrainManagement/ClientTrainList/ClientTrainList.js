@@ -18,6 +18,21 @@ function ClientTrainList() {
  
 
 
+    // am and pm
+    function formatTime(time) {
+      let [hour, minute] = time.split(':')
+      let period = 'AM'
+
+      hour = parseInt(hour, 10);
+      if (hour >= 12) {
+          period = 'PM'
+          if (hour > 12) hour -= 12;
+      }
+      if (hour == 0) hour = 12;
+      return `${hour}:${minute} ${period}`;
+  }
+
+
   return (
 
     <div className="display">
@@ -42,7 +57,7 @@ function ClientTrainList() {
                   <li class="list-group-item">Destination: {train.destination}</li>
 
                   <li class="list-group-item">Departure Location: {train.departureLocation}</li>
-                  <li class="list-group-item">Time of Departure: {train.departureTime}</li>
+                  <li class="list-group-item">Time of Departure:{formatTime(train.departureTime)}</li>
                 </ul>
                 {/* <div class="card-body">
                   <button>BOok</button>
