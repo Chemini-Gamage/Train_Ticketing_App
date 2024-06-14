@@ -10,7 +10,7 @@ function AddTrain() {
     const [ticketPrice, setTicketPrice] = useState("")
     const [trainUrl, setTrainUrl] = useState("")
 
-
+    const [availability, setAvailability] = useState("available")
     async function sendData(e) {
         e.preventDefault();
         const newTrain = {
@@ -21,6 +21,7 @@ function AddTrain() {
             destination,
             ticketPrice,
             trainUrl,
+            availability
         };
         console.log(newTrain);
         axios.post(`http://localhost:8070/train/add`, newTrain).then((resp) => {
@@ -30,6 +31,9 @@ function AddTrain() {
         }).catch((err) => {
             alert(err)
         })
+    }
+    const handleRadioChange = (event) => {
+        setAvailability(event.target.value)
     }
 
     return (
@@ -115,10 +119,10 @@ function AddTrain() {
                                 </div>
 
 
-                                <div class="form-group col-md-4">
+                                {/* <div class="form-group col-md-4">
                                     <label for="validationDefault04" style={{ marginLeft: '-120px' }}>Availability</label>
                                     <input type="text" class="form-control" id="validationDefault04" placeholder="State" />
-                                </div>
+                                </div> */}
 
 
                                 <div class="form-group col-md-4">
@@ -127,6 +131,22 @@ function AddTrain() {
                                 </div>
                             </div>
                             {/* </div> */}
+
+                            <div className="radOptions" style={{ marginLeft: '520px', marginTop: '-82px' }}>
+                                <label for="radOptions">Available</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="available" value="available" checked={availability === 'available'} class="custom-control-input" onChange={handleRadioChange} />
+                                    <label class="custom-control-label" for="available">Yes</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="unavailable" value="unavailable" checked={availability === 'unavailable'} onChange={handleRadioChange} name="customRadio" class="custom-control-input" />
+                                    <label class="custom-control-label" for="unavailable">No</label>
+                                </div>
+                            </div>
+
+
+
+
 
                             <div class="form-group">
                                 <div class="form-check">

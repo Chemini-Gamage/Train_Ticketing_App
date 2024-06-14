@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import './AdminTrainList.css'
 function AdminTrainList() {
     const [train, setTrain] = useState([])
     function getTrain() {
@@ -64,7 +65,7 @@ function AdminTrainList() {
                             <td>{train.departureTime}</td>
 
                             <td>{train.trainUrl}</td>
-                            <td>yes</td>
+                            <td>{train.availability}</td>
                             {/* use a checkbox or sth */}
                             <td>
                                 <Link to={`/update/${train._id}`} className="btn btn-success">Update</Link>
