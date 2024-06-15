@@ -15,7 +15,7 @@ const trainSchema = new Schema({
     },
     departureLocation: {
         type: String,
-        required:false
+        required: false
     },
     destination: {
         type: String,
@@ -27,6 +27,12 @@ const trainSchema = new Schema({
     },
     trainUrl: {
         type: String,
+        required: true
+    },
+
+    availability: {
+        type: String,
+        enum: [`available`, `unavailable`],
         required: true
     },
 })

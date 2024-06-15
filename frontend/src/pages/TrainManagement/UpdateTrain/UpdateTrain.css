@@ -1,0 +1,18 @@
+.update{
+    /* background-image: url(https://img.freepik.com/free-photo/medium-shot-women-with-smartphone_23-2149142277.jpg?t=st=1718227345~exp=1718230945~hmac=0dfa34330c8e3cd96ac49b2025e3cfe3de6561bc8a35f13246c1c80d7e014dba&w=1060); */
+}
+
+.update .container {
+    background-color: rgb(181, 225, 237);
+    width: fit-content;
+}
+
+.update.form-popup {
+    position: fixed;
+    max-width: 720px;
+
+}
+
+/* update.title {
+    margin-left: 10px
+} */
