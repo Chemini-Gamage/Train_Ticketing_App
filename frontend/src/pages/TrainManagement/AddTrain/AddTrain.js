@@ -9,10 +9,16 @@ function AddTrain() {
     const [departureTime, setDepartureTime] = useState("")
     const [ticketPrice, setTicketPrice] = useState("")
     const [trainUrl, setTrainUrl] = useState("")
-
+    const [errors, setErrors] = useState({});
     const [availability, setAvailability] = useState("available")
     async function sendData(e) {
         e.preventDefault();
+
+
+        let validationError = {};
+        if (!validateName(trainName)) {
+            validationError.trainName = "no characters other than alphabetical leteers are allowed"
+        }
         const newTrain = {
             trainCode,
             trainName,
@@ -36,6 +42,13 @@ function AddTrain() {
         setAvailability(event.target.value)
     }
 
+
+    //validations
+    const validateName = (name) => /^[A-Za-z\s]+$/.test(name);
+
+
+
+
     return (
         <div className="add"><br></br>
             <div className="container">
@@ -44,7 +57,7 @@ function AddTrain() {
                     <div className="form-box">
                         <form style={{ marginLeft: '20px' }} onSubmit={sendData}>
                             <div className="title" style={{ marginLeft: '-500px', marginTop: '10px' }}>
-                                <button style={{ marginLeft: '-40px', marginTop: '20px' }}>Add</button>
+                                <button style={{ marginLeft: '-40px', marginTop: '20px' }}>List</button>
 
                                 <h5><b>New train</b></h5>
                             </div>
@@ -64,6 +77,7 @@ function AddTrain() {
                                     <input type="text" class="form-control" id="trainName" placeholder="First name" onChange={(e) => {
                                         setTrainName(e.target.value)
                                     }} required />
+                                    {errors.trainName && <div className="text-danger">{errors.trainName}</div>}
                                 </div>
 
 
@@ -79,17 +93,22 @@ function AddTrain() {
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="departureTime" style={{ marginLeft: '-120px' }}>Departure Time</label>
-                                    <input type="text" class="form-control" id="departureTime" placeholder="Last name" onChange={(e => {
+                                    <input type="time" class="form-control" id="departureTime" placeholder="Last name" onChange={(e => {
                                         setDepartureTime(e.target.value)
                                     })} required />
                                 </div>
 
                                 <div class="form-group col-md-4">
                                     <label for="ticketPrice" style={{ marginLeft: '-120px' }}>Ticket price</label>
-                                    <input type="text" class="form-control" id="ticketPrice" placeholder="Last name" onChange={(e) => {
-                                        setTicketPrice(e.target.value)
-                                    }} required />
-                                </div>
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">Rs</span>
+                                        </div>
+
+                                        <input type="text" class="form-control" id="ticketPrice" placeholder="Last name" onChange={(e) => {
+                                            setTicketPrice(e.target.value)
+                                        }} required />
+                                    </div></div>
 
                                 <div class="form-group col-md-4">
                                     <label for="destination" style={{ marginLeft: '-120px' }}>Destiantion</label>
@@ -112,8 +131,8 @@ function AddTrain() {
                             <div class="row">
 
                                 <div class="form-group col-md-4">
-                                    <label for="validationDefault03" style={{ marginLeft: '-120px' }}>URL</label>
-                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" onChange={((e) => {
+                                    <label for="url" style={{ marginLeft: '-120px' }}>URL</label>
+                                    <input type="text" class="form-control" id="validationDefault03ur" placeholder="City" onChange={((e) => {
                                         setTrainUrl(e.target.value)
                                     })} required />
                                 </div>
@@ -125,27 +144,23 @@ function AddTrain() {
                                 </div> */}
 
 
-                                <div class="form-group col-md-4">
-                                    <label for="validationDefault05" style={{ marginLeft: '-120px' }}>Date</label>
-                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" />
+
+                                {/* </div> */}
+
+                                <div className="radOptions" style={{ marginLeft: '450px', marginTop: '-82px' }}>
+                                    <label for="radOptions" style={{ marginLeft: '-950px' }}>Available</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="available" value="available" checked={availability === 'available'} class="custom-control-input" onChange={handleRadioChange} />
+                                        <label class="custom-control-label" for="available" style={{ marginLeft: '-950px' }} >Yes</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="unavailable" value="unavailable" checked={availability === 'unavailable'} onChange={handleRadioChange} name="customRadio" class="custom-control-input" />
+                                        <label class="custom-control-label" for="unavailable" style={{ marginLeft: '-950px' }}>No</label>
+                                    </div>
                                 </div>
-                            </div>
-                            {/* </div> */}
-
-                            <div className="radOptions" style={{ marginLeft: '520px', marginTop: '-82px' }}>
-                                <label for="radOptions">Available</label>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="available" value="available" checked={availability === 'available'} class="custom-control-input" onChange={handleRadioChange} />
-                                    <label class="custom-control-label" for="available">Yes</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="unavailable" value="unavailable" checked={availability === 'unavailable'} onChange={handleRadioChange} name="customRadio" class="custom-control-input" />
-                                    <label class="custom-control-label" for="unavailable">No</label>
-                                </div>
-                            </div>
 
 
-
+                            </div >
 
 
                             <div class="form-group">
@@ -160,9 +175,9 @@ function AddTrain() {
 
                             <br></br>
 
-                            <button class="btn btn-primary" style={{ marginRight: '10px' }} type="submit">Submit form</button>
+                            <button class="btn btn-primary" style={{ marginRight: '10px', marginBottom: '12px' }} type="submit">Submit form</button>
 
-                            <button class="btn btn-danger" style={{ marginRight: '-400px' }} type="submit">Reset form</button>
+                            <button class="btn btn-danger" style={{ marginRight: '-400px', marginBottom: '12px' }} type="submit">Reset form</button>
                         </form>
                     </div>   </div></div></div>
 
