@@ -56,19 +56,42 @@ function AdminTrainList() {
     const handleDeleteSelected = () => {
         console.log("deleting", selectedRows)
     }
+
+
+    //search
+
+    const filterData = (train, searchkey) => {
+        const result4 = train.filter((train) =>
+            train.trainName.toLowerCase().slice(0, 4).includes(searchkey.toLowerCase()));
+        setTrain(result4)
+    };
+    const handleSearchArea = (e) => {
+        const searchkey = e.currentTarget.value;
+        axios.get(`http://localhost:8070/train/display`, {
+
+        }).then((resp) => {
+            filterData(resp.data, searchkey);
+
+        }).catch((err) => {
+            console.log(err);
+
+        })
+    }
+
+
     return (
         <div className="displayA" style={{ marginTop: "20px", marginLeft: '50px', marginRight: '50px' }}>
             <h5>Admin list of trains</h5>
 
 
             <nav>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={handleSearchArea} />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
 
-            <Link to="/train/viewMore" className="btn btn-success" style={{ marginLeft: '1000px', marginTop: "-10px" }}>Add</Link>
+            <Link to="/add" className="btn btn-success" style={{ marginLeft: '1000px', marginTop: "-10px" }}>Add</Link>
             <button className="btnr" onClick={handleDeleteSelected}>Delete Selected</button>
             <hr></hr>
             <table class="table table-bordered" >
@@ -107,9 +130,9 @@ function AdminTrainList() {
                             {/* use a checkbox or sth */}
                             <td>{train.ticketPrice}</td>
                             <td>
-                                <Link to="/train/viewMore" className="btn btn-primary">View more</Link>
-                                <Link to={`/update/${train._id}`} className="btn btn-success">Update</Link>
-                                <button className="btn btn-danger" onClick={() => { handleDelete(train._id) }}>Delete</button>
+                                <Link to="/train/viewMore" className="btn btn-primary" style={{ marginLeft: '-140px', marginRight: '10px' }}>View</Link>
+                                <Link to={`/update/${train._id}`} className="btn btn-success" style={{ marginLeft: '0px', marginRight: '10px' }}>Update</Link>
+                                <button className="btn btn-danger" style={{ marginLeft: '200px', marginRight: '10px', marginTop: '-70px' }} onClick={() => { handleDelete(train._id) }}>Delete</button>
                             </td>
                         </tr>
                     ))}

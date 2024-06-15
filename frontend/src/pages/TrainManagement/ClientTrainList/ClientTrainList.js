@@ -32,6 +32,25 @@ function ClientTrainList() {
     return `${hour}:${minute} ${period}`;
   }
 
+  const filterData = (train, searchkey) => {
+    const result4 = train.filter((train) =>
+      train.destination.toLowerCase().slice(0, 4).includes(searchkey.toLowerCase()));
+    setTrain(result4)
+  };
+  const handleSearchArea = (e) => {
+    const searchkey = e.currentTarget.value;
+    axios.get(`http://localhost:8070/train/display`, {
+
+    }).then((resp) => {
+      filterData(resp.data, searchkey);
+
+    }).catch((err) => {
+      console.log(err);
+
+    })
+  }
+
+
 
   return (
 
@@ -39,7 +58,7 @@ function ClientTrainList() {
       {/* <h5> list of trains</h5> */}
       {/* highligh the menu icon */}
       <form class="form-inline my-2 my-lg-4" style={{ marginLeft: '250px' }}>
-        <input class="form-control mr-sm-2" type="search" placeholder="Search by destination" style={{ width: '900px' }} aria-label="Search" />
+        <input class="form-control mr-sm-2" type="search" onChange={handleSearchArea} placeholder="Search by destination" style={{ width: '900px' }} aria-label="Search" />
         <button class="btn btn-outline-success my-2 my-sm-2" type="submit">Search</button>
 
 
@@ -68,63 +87,9 @@ function ClientTrainList() {
                       <div className="dep">
                         <p style={{ marginLeft: '-12px' }}>{train.destination}</p>
                       </div>
-
-
                       <p style={{ marginLeft: '-212px', marginTop: '10px' }}>Rs.{train.ticketPrice}.00</p>
-
-
-
-
-
-
-
-
-
-
-                      {/* <table class="table table-bordered">
-                        <thead>
-                          <tr>
-                            <th scope="col">Field</th>
-                            <th scope="col">value</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Destination</td>
-                            <td>{train.destination}</td>
-                          </tr>
-                          <tr>
-                            <td>Time of Departure</td>
-                            <td>{train.departureTime}</td>
-                          </tr>
-                          */}
-                      {/* <tr>
-                            <td>Departure Location</td>
-                            <td>{train.departureLocation}</td>
-                          </tr> */}
-
-                      {/* <tr>
-                            <td>Ticket price</td>
-                            <td>{train.ticketPrice}</td>
-                          </tr>
-                          <tr>
-                            <td>Availability</td>
-                            <td>{train.availability}</td>
-                          </tr>
-                        </tbody>
-                      </table> */}
-
-
-
-
-
+                      <button>check route</button>
                     </div>
-
-
-
-
-
 
                   </div>
                 </div >

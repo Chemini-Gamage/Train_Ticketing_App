@@ -1,6 +1,15 @@
-.display{
+.displayA {}
 
-}
-.display th{
+.displayA th {
     background-color: rgb(115, 224, 255);
+}
+
+.displayA tr:hover {
+    background-color: rgb(189, 222, 0);
+}
+
+.displayA .btnr {
+
+    margin-left: 20px;
+    color: blue;
 }
