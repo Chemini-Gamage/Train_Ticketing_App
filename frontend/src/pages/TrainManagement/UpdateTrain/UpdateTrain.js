@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import './UpdateTrain.css'
 
 function UpdateTrain() {
     const { id } = useParams("")
@@ -11,6 +12,8 @@ function UpdateTrain() {
     const [departureTime, setDepartureTime] = useState("")
     const [ticketPrice, setTicketPrice] = useState("")
     const [trainUrl, setTrainUrl] = useState("")
+    const [errors, setErrors] = useState({});
+    const [availability, setAvailability] = useState("available")
     const update = (e) => {
         e.preventDefault();
         const updateTrain = {
@@ -58,6 +61,13 @@ function UpdateTrain() {
 
 
 
+    const handleRadioChange = (event) => {
+        setAvailability(event.target.value)
+    }
+
+
+    //validations
+    const validateName = (name) => /^[A-Za-z\s]+$/.test(name);
 
 
 
@@ -69,7 +79,7 @@ function UpdateTrain() {
                     <div className="form-box">
                         <form style={{ marginLeft: '20px' }} onSubmit={update}>
                             <div className="title" style={{ marginLeft: '-500px', marginTop: '10px' }}>
-                                <button style={{ marginLeft: '-40px', marginTop: '20px' }}>Update</button>
+                                <button style={{ marginLeft: '-40px', marginTop: '20px' }}>List</button>
 
                                 <h5><b>update train</b></h5>
                             </div>
@@ -104,17 +114,21 @@ function UpdateTrain() {
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="departureTime" style={{ marginLeft: '-120px' }}>Departure Time</label>
-                                    <input type="text" class="form-control" id="departureTime" placeholder="Last name" onChange={(e => {
+                                    <input type="time" class="form-control" id="departureTime" placeholder="Last name" onChange={(e => {
                                         setDepartureTime(e.target.value)
                                     })} value={departureTime} required />
                                 </div>
-
                                 <div class="form-group col-md-4">
                                     <label for="ticketPrice" style={{ marginLeft: '-120px' }}>Ticket price</label>
-                                    <input type="text" class="form-control" id="ticketPrice" placeholder="Last name" onChange={(e) => {
-                                        setTicketPrice(e.target.value)
-                                    }} vallue={ticketPrice} required />
-                                </div>
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">Rs</span>
+                                        </div>
+
+                                        <input type="text" class="form-control" id="ticketPrice" placeholder="Last name" onChange={(e) => {
+                                            setTicketPrice(e.target.value)
+                                        }} value={ticketPrice} required />
+                                    </div></div>
 
                                 <div class="form-group col-md-4">
                                     <label for="destination" style={{ marginLeft: '-120px' }}>Destiantion</label>
@@ -137,44 +151,50 @@ function UpdateTrain() {
                             <div class="row">
 
                                 <div class="form-group col-md-4">
-                                    <label for="validationDefault03" style={{ marginLeft: '-120px' }}>URL</label>
-                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" onChange={((e) => {
+                                    <label for="url" style={{ marginLeft: '-120px' }}>URL</label>
+                                    <input type="text" class="form-control" id="url" placeholder="City" onChange={((e) => {
                                         setTrainUrl(e.target.value)
                                     })} value={trainUrl} required />
                                 </div>
-
-
+                                {/* 
                                 <div class="form-group col-md-4">
-                                    <label for="validationDefault04" style={{ marginLeft: '-120px' }}>Availability</label>
-                                    <input type="text" class="form-control" id="validationDefault04" placeholder="State" />
-                                </div>
-
-
-                                <div class="form-group col-md-4">
-                                    <label for="validationDefault05" style={{ marginLeft: '-120px' }}>Date</label>
-                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" />
-                                </div>
+                                    <label for="date" style={{ marginLeft: '-120px' }}>Date</label>
+                                    <input type="date" class="form-control" id="date" placeholder="Zip"
+                                        onChange={(e) => { setDepartureTime(e.target.value) }}
+                                        value={date} required />
+                                </div> */}
                             </div>
-                            {/* </div> */}
-
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
-                                    <label class="form-check-label" for="invalidCheck2">
-                                        <b>    I Agree to </b>
-                                        terms and conditions
-                                    </label>
+                            <div className="radOptions" style={{ marginLeft: '500px', marginTop: '-82px' }}>
+                                <label for="radOptions">Available</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="available" value="available" checked={availability === 'available'} class="custom-control-input" onChange={handleRadioChange} />
+                                    <label class="custom-control-label" for="available">Yes</label>
                                 </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="unavailable" value="unavailable" checked={availability === 'unavailable'} onChange={handleRadioChange} name="customRadio" class="custom-control-input" />
+                                    <label class="custom-control-label" for="unavailable">No</label>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="form-check" style={{ marginRight: '10px', marginLeft: '-500px' }} >
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required />
+                                        <label class="form-check-label" for="invalidCheck2">
+                                            <b>    I Agree to </b>
+                                            terms and conditions
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <br></br>
+
+                                <button class="btn btn-primary" style={{ marginRight: '10px', marginLeft: '-500px', marginBottom: '50px' }} type="submit">Update form</button>
+
+                                <button class="btn btn-danger" style={{ marginRight: '-400px', marginBottom: '50px' }} type="submit">Reset form</button>
                             </div>
-
-                            <br></br>
-
-                            <button class="btn btn-primary" style={{ marginRight: '10px' }} type="submit">Update form</button>
-
-                            <button class="btn btn-danger" style={{ marginRight: '-400px' }} type="submit">Reset form</button>
                         </form>
-                    </div>   </div></div></div>
-
+                    </div>   </div></div >
+        </div >
     )
 }
 
