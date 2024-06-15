@@ -1,4 +1,5 @@
 import './ClientTrainList.css'
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 function ClientTrainList() {
@@ -75,7 +76,8 @@ function ClientTrainList() {
                 <img class="card-img-top" src={train.trainUrl} style={{ height: '140px' }} />
                 <div class="availabilty" style={{ marginTop: '-40px', backgroundColor: 'green' }}   >{train.availability}</div>
 
-                <button>Book ticket</button>
+                <Link to={`/addBooking/${train._id}`} className="btn btn-primary" style={{ marginLeft: '0px', marginRight: '10px', marginTop: '12px' }}>book ticket</Link>
+
                 {/* <p class="card-text"></p> */}
 
                 <div class="container mt-5" >
