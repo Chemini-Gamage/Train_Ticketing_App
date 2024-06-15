@@ -1,0 +1,22 @@
+.display {
+    /* background-color: rgb(178, 178, 202); */
+}
+
+.display .form-inline my-2 my-lg-0 {
+    margin-left: -1500px;
+}
+
+.display p {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: medium;
+    font-weight: bold
+}
+
+.display .dep {
+    background-color: rgb(168, 179, 179);
+}
+
+.display .card {
+    border: 2px solid #ccc; 
+    box-shadow: 0 0 10px rgba(0, 0, 2, 0.2);
+}
