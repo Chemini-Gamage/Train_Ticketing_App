@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Heade.css'
+import { CgProfile } from "react-icons/cg";
 function Header() {
 
 
@@ -62,7 +63,9 @@ function Header() {
                 <div className="currentDT" style={{ marginLeft: '600px' }}>
                     {formatDateTime(currentDateTime)}
                 </div>
-                <a class="nav-item nav-link" href="#" style={{ marginLeft: '100px' }}>profile</a>
+                <a className="nav-item nav-link" href="#" style={{ marginLeft: '90px', fontSize: '42px' }}>
+    <CgProfile />
+</a>
 
             </div>
         </nav>
