@@ -74,7 +74,7 @@ function ClientTrainList() {
             <div class="card-group" style={{ height: '2px' }} >
               <div class="card">
                 <img class="card-img-top" src={train.trainUrl} style={{ height: '140px' }} />
-                <div class="availabilty" style={{ marginTop: '-40px', backgroundColor: 'green' }}   >{train.availability}</div>
+                <div class="availabilty" style={{ marginTop: '0px', backgroundColor: 'green' }}   >{train.availability}</div>
 
                 <Link to={`/addBooking/${train._id}`} className="btn btn-primary" style={{ marginLeft: '0px', marginRight: '10px', marginTop: '12px' }}>book ticket</Link>
 
@@ -104,8 +104,9 @@ function ClientTrainList() {
           </div >
         ))}
       </div >
-
+      <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>    <br></br>
     </div >
+
   )
 }
 

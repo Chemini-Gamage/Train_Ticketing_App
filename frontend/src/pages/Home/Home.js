@@ -12,19 +12,17 @@ function Home() {
                 <div className="about-section-container">
                     <div className="about-background-image-container">
                         <img src={train25} style={{ height: '500px', width: '1477px' }} />
-                        <Link to="/add" className="btn btn-success" style={{ marginLeft: '-20px', marginTop: '-450px' }}>get started</Link>
+                        <Link to="/userType" className="btn btn-success" style={{ marginLeft: '-20px', marginTop: '-250px' }}>get started</Link>
                     </div>
-                    {/* <div className="about-section-image-container">
-                <img src={train26} />
                 
-            </div> */}
                     <div className="home-section-text-container" style={{ marginTop: '-370px' }} >
                         <h1 className="primary-heading" style={{ color: 'white' }}>Welcome to TransitExpress</h1>
 
-                        <p className="primary-subheading" style={{ fontWeight: 'bold', color: 'white', marginTop: '170px' }}>Welcome aboard!
-                            We're thrilled to have you join us on your journey.<br></br> At TransitExpress,
+                        <p style={{ color: 'white', fontSize: '20px', fontWeight: 'bold', textShadow: '2px 2px 1px rgba(0.5,0,0,0.5)', marginBottom: '80px' }}>Welcome aboard!
+                            We're thrilled to have you join us on your journey.<br></br> At TransitExpress,<br></br>
                             we're dedicated to providing you with a seamless and enjoyable travel experience,
                             every time you step on board.</p>
+                        {/* <Link to="/add" className="btn btn-info">Infor</Link> */}
                         {/* 
                 <p className="primary-text">Lorem</p>
                 <p className="primary-text">Lorem</p>
@@ -85,7 +83,47 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                </div>    </div>    </>
+                </div>
+                <br></br>   <br></br>
+                <div className="work-section-wrapper">
+                    <div className="work-section-top">
+                        <h1>REVIEWS GIVEN</h1>
+                        {/* <p className="primary-text">
+                            Lorem
+                        </p> */}
+                    </div>
+                    <div class="card-deck">
+                        <div class="card3">
+
+                            <div class="card-body">
+                                <h4>John</h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style={{ width: "50", ariaValuenow: "25", ariaValuemin: "0", ariaValuemax: "100" }}></div>
+                                </div>
+                                <h5 class="card-title">Smooth Booking Process!</h5>
+                                <p class="card-text">I've been using this platform for all my train journeys. Booking is quick and hassle-free. Highly recommended!</p>
+                                {/* <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> */}
+                            </div>
+                        </div>
+                        <div class="card3">
+
+                            <div class="card-body">
+                                <h4>Jehn</h4>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style={{ width: "20%", ariaValuenow: "5", ariaValuemin: "0", ariaValuemax: "100" }}></div>
+                                </div>
+
+                                <h5 class="card-title">Great Service, Always On Time!</h5>
+                                <p class="card-text">I love how easy it is to find and book my train tickets here. The trains are punctual, and customer service is excellent</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>    </>
     )
 }
 

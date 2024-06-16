@@ -59,13 +59,14 @@ function Header() {
                     <a class="nav-item nav-link active" style={{ marginLeft: '50px', marginRight: '-50px' }} href="#">Home <span class="sr-only">(current)</span></a>
                     <a class="nav-item nav-link" href="#" style={{ marginLeft: '70px', marginRight: '-50px' }}>Train list</a>
                     <a class="nav-item nav-link" href="#" style={{ marginLeft: '50px', marginRight: '-50px' }}>Booking List</a>
+                    <a class="nav-item nav-link" href="#" style={{ marginLeft: '50px', marginRight: '-50px' }}>About us</a>
                 </div>
                 <div className="currentDT" style={{ marginLeft: '600px' }}>
                     {formatDateTime(currentDateTime)}
                 </div>
                 <a className="nav-item nav-link" href="#" style={{ marginLeft: '90px', fontSize: '42px' }}>
-    <CgProfile />
-</a>
+                    <CgProfile />
+                </a>
 
             </div>
         </nav>
