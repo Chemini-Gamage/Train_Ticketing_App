@@ -86,8 +86,11 @@ function ClientTrainList() {
                     <div class="card-body">
                       <p style={{ marginLeft: '-212px' }}>{train.trainName}</p>
                       <p style={{ marginLeft: '200px', marginTop: '-40px' }}>{train.departureTime}</p>
+                      <div className="depFrom">
+                        <p style={{ marginLeft: '-12px' }}>FROM:{train.departureLocation}</p>
+                      </div>
                       <div className="dep">
-                        <p style={{ marginLeft: '-12px' }}>{train.destination}</p>
+                        <p style={{ marginLeft: '-12px' }}>TO:{train.destination}</p>
                       </div>
                       <p style={{ marginLeft: '-212px', marginTop: '10px' }}>Rs.{train.ticketPrice}.00</p>
                       <button>check route</button>
