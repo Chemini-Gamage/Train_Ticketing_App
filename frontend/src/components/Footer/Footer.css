@@ -1,3 +1,7 @@
 .Footer {
     position: fixed
 }
+
+.Footer .myfootecss {
+    background-color: hsl(180, 82%, 59%);
+}

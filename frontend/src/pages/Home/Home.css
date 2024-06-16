@@ -1,3 +1,7 @@
+.home {
+    background-color: rgb(184, 186, 186);
+}
+
 .home-section-text-container {
     font-size: medium;
     margin-left: '-10050px';
@@ -6,4 +10,51 @@
 
 
 
+
+}
+
+.home .card2 {
+    background-color: rgb(211, 232, 247);
+
+    justify-content: center;
+    padding: '20px';
+    margin-bottom: 2050px;
+    position: absolute;
+    transform: translateY(-80%);
+}
+
+.home .stat {
+    margin-left: -500px;
+}
+
+.home .stat2 {
+    margin-top: -87px;
+    margin-left: 500px;
+}
+
+.home .stat .card-text {
+    color: rgb(242, 115, 100);
+}
+
+.home .work-section-wrapper .work-section-top h1 {
+    color: rgb(128, 23, 23);
+    margin-bottom: 50px;
+}
+
+.home .card-deck {
+    margin-left: 100px;
+    margin-right: 100px
+}
+
+.home .card-deck .card {
+    border-radius: 102px;
+    border-style: solid;
+}
+
+.home .card-deck .card3 {
+    border-radius: 2px;
+    width: 400px;
+    border-style: solid;
+    margin-right: 72px;
+    background-color: rgb(195, 213, 208);
 }
