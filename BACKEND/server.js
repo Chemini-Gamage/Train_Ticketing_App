@@ -27,3 +27,5 @@ app.listen(PORT, () => {
 
 const trainRoute = require(`./routes/trains`)
 app.use("/train", trainRoute)
+const ticketRoute =require(`./routes/tickets`)
+app.use(`/ticket`,ticketRoute);
