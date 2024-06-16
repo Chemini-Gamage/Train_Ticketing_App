@@ -2,12 +2,12 @@ import './ClientTrainList.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-function ClientTrainList() {
+function ClientTrainList({ departureLocation, destination }) {
 
-  const [train, setTrain] = useState([])
+  const [trainList, setTrainList] = useState([])
   function getTrain() {
     axios.get(`http://localhost:8070/train/display`).then((resp) => {
-      setTrain(resp.data)
+      setTrainList(resp.data)
     }).catch((err) => {
       alert(err)
     })
@@ -33,10 +33,10 @@ function ClientTrainList() {
     return `${hour}:${minute} ${period}`;
   }
 
-  const filterData = (train, searchkey) => {
-    const result4 = train.filter((train) =>
-      train.destination.toLowerCase().slice(0, 4).includes(searchkey.toLowerCase()));
-    setTrain(result4)
+  const filterData = (trainList, searchkey) => {
+    const result4 = trainList.filter((trainList) =>
+      trainList.destination.toLowerCase().slice(0, 4).includes(searchkey.toLowerCase()));
+    setTrainList(result4)
   };
   const handleSearchArea = (e) => {
     const searchkey = e.currentTarget.value;
@@ -69,14 +69,14 @@ function ClientTrainList() {
 
       <div className="row" style={{ marginLeft: '80px', marginRight: '-80px', marginTop: '50px' }}>
 
-        {train.map((train) => (
-          <div key={train._id} className="col-sm-3 mb-3" >
+        {trainList.map((trainList) => (
+          <div key={trainList._id} className="col-sm-3 mb-3" >
             <div class="card-group" style={{ height: '2px' }} >
               <div class="card">
-                <img class="card-img-top" src={train.trainUrl} style={{ height: '140px' }} />
-                <div class="availabilty" style={{ marginTop: '0px', backgroundColor: 'green' }}   >{train.availability}</div>
+                <img class="card-img-top" src={trainList.trainUrl} style={{ height: '140px' }} />
+                <div class="availabilty" style={{ marginTop: '0px', backgroundColor: 'green' }}   >{trainList.availability}</div>
 
-                <Link to={`/addBooking/${train._id}`} className="btn btn-primary" style={{ marginLeft: '0px', marginRight: '10px', marginTop: '12px' }}>book ticket</Link>
+                <Link to={`/addBooking/${trainList._id}`} className="btn btn-primary" style={{ marginLeft: '0px', marginRight: '10px', marginTop: '12px' }}>book ticket</Link>
 
                 {/* <p class="card-text"></p> */}
 
@@ -84,15 +84,15 @@ function ClientTrainList() {
                   <div class style={{ marginTop: '-42px' }}>
 
                     <div class="card-body">
-                      <p style={{ marginLeft: '-212px' }}>{train.trainName}</p>
-                      <p style={{ marginLeft: '200px', marginTop: '-40px' }}>{train.departureTime}</p>
+                      <p style={{ marginLeft: '-212px' }}>{trainList.trainName}</p>
+                      <p style={{ marginLeft: '200px', marginTop: '-40px' }}>{trainList.departureTime}</p>
                       <div className="depFrom">
-                        <p style={{ marginLeft: '-12px' }}>FROM:{train.departureLocation}</p>
+                        <p style={{ marginLeft: '-12px' }}>FROM:{trainList.departureLocation}</p>
                       </div>
                       <div className="dep">
-                        <p style={{ marginLeft: '-12px' }}>TO:{train.destination}</p>
+                        <p style={{ marginLeft: '-12px' }}>TO:{trainList.destination}</p>
                       </div>
-                      <p style={{ marginLeft: '-212px', marginTop: '10px' }}>Rs.{train.ticketPrice}.00</p>
+                      <p style={{ marginLeft: '-212px', marginTop: '10px' }}>Rs.{trainList.ticketPrice}.00</p>
                       <button>check route</button>
                     </div>
 
