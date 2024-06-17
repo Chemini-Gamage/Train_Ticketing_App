@@ -36,7 +36,7 @@ router.route("/update/:id").put(async (req, res) => {
         trainUrl,
         availability
     };
-    const update = await Train.findByIdAndDelete(userId, updateTrains).then((respo) => {
+    const update = await Train.findByIdAndUpdate(userId, updateTrains).then((respo) => {
         res.status(200).send({ status: "updated", respo })
     }).catch((err) => {
         res.status(500).send({ status: "update error", err })

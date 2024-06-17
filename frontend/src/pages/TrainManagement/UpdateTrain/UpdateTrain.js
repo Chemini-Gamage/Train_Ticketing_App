@@ -26,8 +26,8 @@ function UpdateTrain() {
             trainUrl,
         }
         console.log(updateTrain);
-        axios.put(`http://localhost:8070/train/update/${id}`, updateTrain).then((res) => {
-            console.log(res);
+        axios.put(`http://localhost:8070/train/update/${id}`, updateTrain).then((respo) => {
+            console.log(respo);
             alert("updated")
             setTrainCode("");
             setTrainName("");
