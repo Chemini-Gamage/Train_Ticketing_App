@@ -7,6 +7,10 @@ import { FaRestroom } from "react-icons/fa";
 import { TbAirConditioningDisabled } from "react-icons/tb";
 import { Link, useParams } from 'react-router-dom';
 
+import { loadStripe } from '@stripe/stripe-js';
+
+import BookingList from '../BookingList/BookingList';
+
 function AddBooking() {
     const { id } = useParams();
     const [train, setTrain] = useState([]);
@@ -67,6 +71,35 @@ function AddBooking() {
             return selectedPrice * parseInt(qty, 10)
         }
         return 0;
+
+
+
+    }
+
+    const makePayment = async () => {
+        const stripe = await loadStripe("pk_test_51PTJYbEoLKljEZUpnKRwFddTeKEv28OYjbikkOXCR5O0MWUs5SDeFxusAbh43AruSNFs03F3JN0jurQBqdv0aF6i00oLPAZghh");
+        const body = {
+            tickets: [{
+                trainClass,
+                qty,
+                date,
+                totalAmount: calculateTicketFee(),
+                image: train[0]?.trainUrl
+            }]
+        };
+        const headers = {
+            "Content-Type": "application/json"
+
+        };
+        const apiUrl = "http://localhost:8070/ticket";
+        const response = await fetch(`${apiUrl}/create-checkout-session`, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(body)
+
+        })
+        const session = await response.json();
+        stripe.redirectToCheckout({ sessionId: session.id })
 
     }
 
@@ -147,7 +180,7 @@ function AddBooking() {
                                                         placeholder="Qty"
                                                         value={qty}
                                                         onChange={(e) => setQty(e.target.value)}
-                                                   required />
+                                                        required />
 
                                                     <label htmlFor="departureAt">From</label>
                                                     <h4>{train.departureAt}</h4>
@@ -168,7 +201,7 @@ function AddBooking() {
                                             <hr />
                                             <li className="list-group-item">Total amount to be paid = Rs. {calculateTicketFee()}</li>
                                         </ul>
-                                        <Link to="/payment" type="submit" className="btn btn-primary" disabled={!formValid}> PAY</Link>
+                                        <button type="button" className="btn btn-primary" disabled={!formValid} onClick={makePayment}> PAY</button>
                                     </div>
 
                                 </form>

@@ -17,9 +17,11 @@
 }
 
 .display .card {
-    border: 2px solid #ccc; 
+    border: 2px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 2, 0.2);
+
 }
-.display .depFrom{
+
+.display .depFrom {
     background-color: rgb(241, 248, 222);
 }

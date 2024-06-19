@@ -29,11 +29,13 @@ function UserType() {
         axios.post(`http://localhost:8070/api/userManagement/login`, user).then((res) => {
             if (res.data.success) {
                 console.log(res.data)
+
                 showMessageDialog("Login success")
                 localStorage.setItem('token', res.data.accessToken)
                 localStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('id', res.data.id)
-
+                alert("logged in successfully")
+                window.location.replace("/display/train")
             } else {
                 showMessageDialog("error", "login failed", "reload")
             }
@@ -101,9 +103,9 @@ function UserType() {
 
 
                     </form>
-                    
+
                 </div>
-                
+
             </div>
             {/* <MessageDialog{...messageData} /> */}
         </div>
