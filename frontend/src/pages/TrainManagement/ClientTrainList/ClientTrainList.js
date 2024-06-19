@@ -67,14 +67,15 @@ function ClientTrainList({ departureLocation, destination }) {
       <hr></hr>
 
 
-      <div className="row" style={{ marginLeft: '80px', marginRight: '-80px', marginTop: '50px' }}>
+      <div className="row" style={{ marginLeft: '40px', marginRight: '140px', marginTop: '50px' }}>
 
         {trainList.map((trainList) => (
-          <div key={trainList._id} className="col-sm-3 mb-3" >
-            <div class="card-group" style={{ height: '2px' }} >
+          <div key={trainList._id} className="col-md-4 mb-4" >
+            <div class="card-group" style={{ width: '350px', marginBottom: '20px' }} >
               <div class="card">
-                <img class="card-img-top" src={trainList.trainUrl} style={{ height: '140px' }} />
-                <div class="availabilty" style={{ marginTop: '0px', backgroundColor: 'green' }}   >{trainList.availability}</div>
+                <img class="card-img-top" src={trainList.trainUrl} style={{ height: '120px' }} />
+                <div class={`availability ${trainList.availability === `available` ? `bg-success` : 'bg-danger'}`}>
+                  {trainList.availability}</div>
 
                 <Link to={`/addBooking/${trainList._id}`} className="btn btn-primary" style={{ marginLeft: '0px', marginRight: '10px', marginTop: '12px' }}>book ticket</Link>
 
