@@ -31,7 +31,27 @@ function AdminTrainList() {
         })
     }
 
+    const handleCheckBoxChange = (e, trainId) => {
+        if (e.target.checked) {
+            setSelectedRows([...selectedRows, trainId]);
 
+        } else {
+            setSelectedRows(selectedRows.filter(id => id !== trainId))
+        }
+    }
+
+    const handleDeleteSelect = async () => {
+        try {
+            await Promise.all(selectedRows.map(id => axios.delete(`http://localhost:8070/train/delete/${id}`)));
+            setSelectedRows([])
+            alert("selected deleted")
+
+
+        } catch (err) {
+            alert("Failed to delete")
+
+        }
+    }
 
     // am and pm
     function formatTime(time) {
@@ -92,7 +112,7 @@ function AdminTrainList() {
             </nav>
 
             <Link to="/add" className="btn btn-success" style={{ marginLeft: '1000px', marginTop: "-10px" }}>Add</Link>
-            <button className="btnr" onClick={handleDeleteSelected}>Delete Selected</button>
+            <button className="btnr" onClick={handleDeleteSelect}>Delete Selected</button>
             <hr></hr>
             <table class="table table-bordered" >
                 <thead>
@@ -117,7 +137,7 @@ function AdminTrainList() {
                 <tbody>
                     {train.map((train, index) => (
                         <tr key={train._id} className='col-sm-3 mb-3'>
-                            <td><input type="checkbox" onChange={() => toggleRowSelection(train._id)}></input></td>
+                            <td><input type="checkbox" onChange={(e) => handleCheckBoxChange(e, train._id)}></input></td>
                             <td>{index + 1}</td>
                             <td>{"TR" + train.trainCode}</td>
                             <td>{train.trainName}</td>
