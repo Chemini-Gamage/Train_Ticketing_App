@@ -1,0 +1,21 @@
+.aboutUs {
+    background-color: rgb(248, 247, 247);
+    margin-inline: 1px;
+    margin-bottom: -140px;
+}
+
+.aboutUs .nav-item {
+    margin-left: 250px;
+    margin-top: 12px;
+}
+
+.aboutUs .tab-content {
+    margin-inline: 120px;
+}
+
+.aboutUs p {
+    font-size: larger;
+    font-weight: 200;
+    margin-top: 17px;
+    
+}
