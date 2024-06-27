@@ -57,14 +57,17 @@ function Header() {
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" style={{ marginLeft: '50px', marginRight: '-50px' }} href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#" style={{ marginLeft: '70px', marginRight: '-50px' }}>Train list</a>
-                    <a class="nav-item nav-link" href="#" style={{ marginLeft: '50px', marginRight: '-50px' }}>Booking List</a>
-                    <a class="nav-item nav-link" href="#" style={{ marginLeft: '50px', marginRight: '-50px' }}>About us</a>
+                    <a class="nav-item nav-link" href="/train/display" style={{ marginLeft: '70px', marginRight: '-50px' }}>Train list Admin</a>
+                    <a class="nav-item nav-link" href="/client" style={{ marginLeft: '70px', marginRight: '-50px' }}>Train list client</a>
+
+                    <a class="nav-item nav-link" href="/bookingList" style={{ marginLeft: '50px', marginRight: '-50px' }}>Booking List</a>
+                    <a class="nav-item nav-link" href="/aboutus" style={{ marginLeft: '50px', marginRight: '-50px' }}>About us</a>
+                    <a class="nav-item nav-link" href="/receipt/:id" style={{ marginLeft: '50px', marginRight: '-50px' }}>Receipt pdf</a>
                 </div>
                 <div className="currentDT" style={{ marginLeft: '600px' }}>
                     {formatDateTime(currentDateTime)}
                 </div>
-                <a className="nav-item nav-link" href="#" style={{ marginLeft: '90px', fontSize: '42px' }}>
+                <a className="nav-item nav-link" href="/userprofile" style={{ marginLeft: '90px', fontSize: '42px' }}>
                     <CgProfile />
                 </a>
 

@@ -45,7 +45,7 @@ function AdminTrainList() {
             await Promise.all(selectedRows.map(id => axios.delete(`http://localhost:8070/train/delete/${id}`)));
             setSelectedRows([])
             alert("selected deleted")
-
+            window.location.reload()
 
         } catch (err) {
             alert("Failed to delete")

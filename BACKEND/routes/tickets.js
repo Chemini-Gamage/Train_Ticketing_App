@@ -52,7 +52,7 @@ router.route("/update/:id").put(async (req, res) => {
 router.route("/get/:id").get(async (req, res) => {
     let userId = req.params.id;
     await Ticket.findById(userId).then((response) => {
-        res.status(200).send({ status: "fetched" })
+        res.status(200).send({ status: "fetched", response })
     }).catch((err) => {
         res.status(500).send({ status: err })
     })
@@ -77,7 +77,7 @@ router.post(`/create-checkout-session`, async (req, res) => {
         const { tickets } = req.body;
         const lineItems = tickets.map((ticket) => ({
             price_data: {
-                currency: 'usd',
+                currency: 'irp',
                 product_data: {
                     name: `Ticket :${ticket.trainClass}Class`,
                     images: [ticket.image]
