@@ -1,0 +1,8 @@
+@media print {
+    .rec {}
+
+    .rec .printContainer {
+        margin-top: 18000px;
+        background-color: aqua;
+    }
+}
