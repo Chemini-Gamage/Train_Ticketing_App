@@ -1,12 +1,13 @@
-
+import './Booking.css'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useParams } from 'react'
 import { Link } from 'react-router-dom'
 
 function BookingList() {
 
 
     const [ticket, setticket] = useState([])
+
 
     const [selectedRows, setSelectedRows] = useState([])
     function getticket() {
@@ -81,12 +82,32 @@ function BookingList() {
         })
     }
 
+    const handleCheckBoxChange = (e, bookingId) => {
+        if (e.target.checked) {
+            setSelectedRows([...selectedRows, bookingId]);
+
+        } else {
+            setSelectedRows(selectedRows.filter(id => id !== bookingId))
+        }
+    }
+
+    const handleDeleteSelect = async () => {
+        try {
+            await Promise.all(selectedRows.map(id => axios.delete(`http://localhost:8070/ticket/delete/${id}`)));
+            setSelectedRows([])
+            alert("selected deleted")
+
+
+        } catch (err) {
+            alert("Failed to delete")
+
+        }
+    }
+
 
     return (
-        <div className="displayT" style={{ marginTop: "20px", marginLeft: '50px', marginRight: '50px' }}>
-            <h5> Booking list</h5>
-
-
+        <div className="booking" style={{ marginTop: "20px", marginLeft: '50px', marginRight: '50px' }}>
+            <h5> My Booking list</h5>
             <nav>
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={handleSearchArea} />
@@ -94,44 +115,66 @@ function BookingList() {
                 </form>
             </nav>
 
-            <Link to="/add" className="btn btn-success" style={{ marginLeft: '1000px', marginTop: "-10px" }}>Add</Link>
-            <button className="btnr" onClick={handleDeleteSelected}>Delete Selected</button>
+            <button className="btnr" onClick={handleDeleteSelect}>Filter by the date</button>
+
+
             <hr></hr>
-            <table class="table table-bordered" >
-                <thead>
-                    <tr>
-
-                        <th scope="col">Index</th>
-                        <th scope="col">ticket qty</th>
-                        {/* assign a letter for the tickets */}
-                        <th scope="col">ticket date</th>
-                        <th scope="col">ticketclassType</th>
-                        <th scope="col">Amount</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    {ticket.map((ticket, index) => (
-                        <tr key={ticket._id} className='col-sm-3 mb-3'>
-
-                            <td>{index + 1}</td>
 
 
-                            <td>{ticket.qty}</td>
-                            <td>{ticket.date}</td>
-                            <td>{ticket.trainClass}</td>
-                            <td>{ticket.calculateTicketFee}</td>
-                            {/* 
-                            <td>
-                                <Link to="/ticket/viewMore" className="btn btn-primary" style={{ marginLeft: '-140px', marginRight: '10px' }}>View</Link>
-                                <Link to={`/update/${ticket._id}`} className="btn btn-success" style={{ marginLeft: '0px', marginRight: '10px' }}>Update</Link>
-                                <button className="btn btn-danger" style={{ marginLeft: '200px', marginRight: '10px', marginTop: '-70px' }} onClick={() => { handleDelete(ticket._id) }}>Delete</button>
-                            </td> */}
-                        </tr>
-                    ))}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Current Booking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Cancelled Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                </tbody>
-            </table>
+
+
+                    <table class="table table-bordered" >
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Index</th>
+                                <th scope="col">ticket qty</th>
+                                {/* assign a letter for the tickets */}
+                                <th scope="col">ticket date</th>
+                                <th scope="col">ticketclassType</th>
+                                <th scope="col">Amount</th>
+                                <th>View More</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            {ticket.map((ticket, index) => (
+                                <tr key={ticket._id} className='col-sm-3 mb-3'>
+
+                                    <td>{index + 1}</td>
+                                    <td>{ticket.qty}</td>
+                                    <td>{ticket.date}</td>
+                                    <td>{ticket.trainClass}</td>
+                                    <td>{ticket.calculateTicketFee}</td>
+                                    <td>
+                                        {/* <Link to={`/view/${ticket._id}`} className="btn btn-success" View more></Link> */}
+                                        <Link to={`/rece/${ticket._id}`} className="btn btn-success">View</Link>
+                                    </td>
+
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            </div>
 
 
 

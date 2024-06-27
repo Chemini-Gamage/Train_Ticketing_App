@@ -22,6 +22,7 @@ function PaymentSuccess({ train }) {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary">add more tickets</button>
+                                <button type="button" className="btn btn-primary">send to whatsapp</button>
                             </div>
                         </div>
                     ))}
